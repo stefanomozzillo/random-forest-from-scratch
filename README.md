@@ -33,9 +33,6 @@ random-forest-from-scratch/
 
 ## Development & Experimental Progression
 
-
-## Development & Experimental Progression
-
 ### Stage 1: Core From-Scratch Implementation (`rf/tree.py`, `rf/forest.py`)
 - **`ScratchTree`:** Recursive binary CART regressor selecting optimal feature-threshold splits via variance (MSE) reduction, controlled by stopping criteria (`max_depth`, `min_samples_split`).
 - **`ScratchForest`:** Ensemble wrapper implementing bootstrap sampling with replacement (bagging), per-split random feature subsampling (`max_features`), and prediction averaging across trees.
