@@ -1,34 +1,26 @@
-# California Housing — Random Forest from Scratch
+# Random Forest from Scratch — First-Principles Implementation & Real-World Validation
 
-A regression project on the California Housing dataset comparing custom Decision Tree and Random Forest implementations (written in Python and NumPy) against simple baselines and `scikit-learn`.
+An educational machine learning project implementing **CART Decision Trees** (`ScratchTree`) and **Random Forest Regressors** (`ScratchForest`) from scratch in Python and NumPy, progressively validated against `scikit-learn` across both a controlled benchmark dataset and noisy, real-world real estate records.
 
-## Overview
+## Project Objective
 
-The goal is to predict median house values across California districts while checking whether a custom tree ensemble behaves consistently with standard library implementations in terms of accuracy, overfitting, and runtime.
+Rather than treating ensemble methods as black-box APIs, this repository was built to explore the mechanics of tree-based regression from first principles—covering variance-reduction (MSE) node splitting, bootstrap aggregation (bagging), and random feature subsampling.
 
-The repository is organized into three main parts:
-- **Baselines:** Median predictor and standardized Linear Regression to set a reference error floor.
-- **From-Scratch Models:** Custom `DecisionTree` and `ScratchForest` implementations using variance reduction (MSE) for node splitting.
-- **Validation & Comparison:** Side-by-side benchmarks comparing custom models, `scikit-learn`, and baselines on identical data splits.
+The project follows a structured, progressive experimental workflow:
+1. **Algorithmic Verification:** Building `ScratchTree` and `ScratchForest` in pure Python/NumPy and verifying behavioral parity against `scikit-learn` on a clean benchmark (**California Housing**).
+2. **Real-World Generalization:** Scaling the workflow end-to-end to raw, uncleaned **Italian Real Estate Market (OMI)** records—handling data sanitization, target leakage detection, hyperparameter tuning, and error diagnostics.
 
-## Dataset & Experimental Setup
+---
 
-- **Dataset:** California Housing (`20,640` samples, `8` numerical features).
-- **Train / Test Split:** `80%` training (`16,512` samples) and `20%` hold-out test set (`4,128` samples), kept fixed across all experiments (`random_state=42`).
-- **Subsampling (`N = 2,000` and `N = 5,000`):** Pure-Python tree training is slower than Cython-optimized libraries. Training on fixed subsets of `2,000` and `5,000` rows keeps runtimes practical while still capturing spatial and income patterns across the dataset. All models—including baselines—are evaluated on the exact same subsets for a fair comparison.
-- **Metrics:** Models are evaluated using **Mean Absolute Error (MAE)** on both training and test sets to track generalization and overfitting (`Gap = Test MAE - Train MAE`).
+## Repository Structure
 
-## Main Results
-
-- **Tree Equivalence:** At equal depth (`max_depth=6`), `DecisionTree` produces nearly identical predictions to `scikit-learn`'s `DecisionTreeRegressor`, confirming that the splitting logic matches the reference behavior.
-- **Improvement Over Baselines:** On `N = 5,000`, the Random Forest models reduce Test MAE to around **`0.39`**, compared to **`~0.88`** for the median baseline and **`~0.53`** for linear regression.
-- **Feature Subsampling:** Restricting candidate features at each split (`max_features=3`) lowers test error compared to using all features (`max_features=1.0`), as it reduces correlation between individual trees.
-- **Sample Size Effect:** Increasing training samples from `2,000` to `5,000` consistently lowers Test MAE and narrows the train-test gap across both custom and `scikit-learn` forests.
-
-## Requirements
-
-- Python 3.9+
-- `numpy`
-- `pandas`
-- `scikit-learn`
-- `matplotlib`
+```text
+random-forest-from-scratch/
+├── rf/
+│   ├── tree.py                  # Custom CART regression tree (variance reduction splitting)
+│   └── forest.py                # Bootstrap aggregation & random feature subsampling
+├── notebooks/
+│   ├── 01_...ipynb              # Single tree implementation, baselines & split equivalence
+│   ├── 02_...ipynb              # Ensemble mechanics, bias-variance & subsampling on California Housing
+│   └── 03_milan_omi.ipynb       # End-to-end real-world pipeline on Italian OMI real estate data
+└── README.md
