@@ -55,7 +55,7 @@ random-forest-from-scratch/
 
   ## Requirements & Setup
 
-- Python 3.9+
+- Python 3.11+ (tested on `3.13.18`)
 - Dependencies listed in `requirements.txt` (`numpy`, `pandas`, `scikit-learn`, `matplotlib`, `joblib`, `pytest`)
 
 ```bash
