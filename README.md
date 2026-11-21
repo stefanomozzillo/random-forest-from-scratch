@@ -52,3 +52,15 @@ random-forest-from-scratch/
   - **Depth & Bias–Variance Trade-off:** Increasing `max_depth` from `10` to `20` reduced Test MAE by over **60%** (from **`251.28 €/m²`** down to **`92.74 €/m²`**), demonstrating that deep splits are essential to capture fine-grained municipal and micro-zone price hierarchies.
   - **Parity with `scikit-learn`:** With `n_trees=25` and `max_depth=20`, `ScratchForest` achieved a **Test MAE of `92.74 €/m²`** compared to `scikit-learn`'s **`92.66 €/m²`** (`< 0.1%` difference), tracking both the bimodal peaks and the upper luxury tail (`~20,000 €/m²`) of the true price distribution.
   - **Compute vs. Accuracy Trade-off:** Subsampling features (`max_features=80`) reduced training runtime by over `20%` with a modest accuracy trade-off (`98.52 €/m²`), while contrasting pure-Python execution against `scikit-learn` highlighted the systems impact of Cython compilation and multi-core parallelism (`n_jobs=-1`).
+
+  ## Requirements & Setup
+
+- Python 3.9+
+- Dependencies listed in `requirements.txt` (`numpy`, `pandas`, `scikit-learn`, `matplotlib`, `joblib`, `pytest`)
+
+```bash
+git clone [https://github.com/stefanomozzillo/random-forest-from-scratch.git](https://github.com/stefanomozzillo/random-forest-from-scratch.git)
+cd random-forest-from-scratch
+pip install -r requirements.txt
+```
+
