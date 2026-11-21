@@ -1,5 +1,5 @@
 import numpy as np
-from .tree import DecisionTree
+from .tree import ScratchTree
 
 
 class ScratchForest:
@@ -34,7 +34,7 @@ class ScratchForest:
             # Generate a distinct, reproducible seed for each tree's feature subsampling
             tree_seed = int(self._rng.integers(0, 2**32))
 
-            tree = DecisionTree(
+            tree = ScratchTree(
                 max_depth=self.max_depth,
                 min_samples_split=self.min_samples_split,
                 max_features=self.max_features,

@@ -16,7 +16,7 @@ class Node:
         return self.value is not None
 
 
-class DecisionTree:
+class ScratchTree:
     """CART-style regression tree built from scratch using variance reduction."""
 
     def __init__(
